@@ -1,0 +1,11 @@
+import requests
+
+phone_number = input("Enter the phone number to bomb (with country code): ")
+amount = int(input("Enter the number of SMS to send: ")
+
+for _ in range(amount):
+    payload = {
+        'phone': phone_number,
+        'message': 'Hello, you have been bombed with SMS!'
+    }
+    requests.post('https://textbelt.com/text', data=payload)
